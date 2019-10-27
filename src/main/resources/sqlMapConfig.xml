@@ -1,0 +1,32 @@
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--mybatis的核心配置文件：连接数据库的配置，连接池的配置，事务配置-->
+<configuration>
+    <!--扫描所在包下的所有实体类-->
+    <typeAliases>
+        <package name="cn.kgc.domain"></package>
+    </typeAliases>
+    <environments default="mysql">
+        <!--mysql的配置-->
+        <environment id="mysql">
+            <!--事务的管理-->
+            <transactionManager type="jdbc"></transactionManager>
+            <!--数据源使用连接池的配置-->
+            <dataSource type="pooled">
+                <!--配置驱动-->
+                <property name="driver" value="com.mysql.jdbc.Driver"></property>
+                <!--配置url-->
+                <property name="url" value="jdbc:mysql:///person_info"></property>
+                <!--账号-->
+                <property name="username" value="root"></property>
+                <!--密码-->
+                <property name="password" value="123456"></property>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--引入映射配置文件-->
+    <mappers>
+        <mapper resource="mapper/booksMapper.xml"></mapper>
+    </mappers>
+</configuration>

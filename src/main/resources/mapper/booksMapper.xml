@@ -1,0 +1,37 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mybatis的配置文件：CRUD的操作-->
+<mapper namespace="cn.kgc.dao.BooksMapper">
+    <select id="getBooksList" resultType="Books">
+        select * from books
+    </select>
+    <select id="selectBooksByPrice" parameterType="map" resultType="Map">
+        select * from books where price &gt;=#{minPrice} and price &lt;=#{maxPrice}
+    </select>
+
+    <select id="selectBooksBySome" parameterType="Books" resultType="Books">
+        select * from books where price &gt;=#{price} and num &lt;=#{num}
+    </select>
+    <select id="selectBooksByName" parameterType="String" resultType="Books">
+        select * from books where bookName like "%"#{0}"%"
+    </select>
+    <select id="selectBooksByName2" parameterType="string" resultType="Books">
+        select * from books where bookName like #{bookName}
+    </select>
+    <select id="selectBooksByName3" parameterType="string" resultType="Books">
+        select * from books where bookName like "%${value}%"
+    </select>
+    <select id="selectBooksByName4" parameterType="Books" resultType="Books">
+        select * from books where bookName like "%"#{bookName}"%"
+    </select>
+    <insert id="insertBooks" parameterType="Books">
+        insert into books values (null,#{bookName},#{price},#{num});
+    </insert>
+    <delete id="deleteBooks" parameterType="integer">
+        delete from books where id = #{0}
+    </delete>
+    <update id="updateBooks" parameterType="Books">
+        update books set bookName = #{bookName},price = #{price},num = #{num} where id = #{id}
+    </update>
+</mapper>
